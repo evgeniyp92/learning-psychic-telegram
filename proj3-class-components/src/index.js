@@ -5,31 +5,34 @@ import SeasonDisplay from './SeasonDisplay';
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { lat: null };
+        this.state = { lat: null, errorMessage: `` };
 
         window.navigator.geolocation.getCurrentPosition(
             (position) => {
                 // We called setState!
                 this.setState({ lat: position.coords.latitude });
-                // You dont ever want to directly assign to state, just useState instead
+                // You dont ever want to directly assign to state, just use setState instead
                 // 1 exception: when we init the state in the constructor
             },
             (error) => {
-                console.log(
-                    `Something went wrong, here are the details:`,
-                    error,
-                );
+                // You dont have to update the entire object when you call setState
+                this.setState({ errorMessage: error.message });
             },
         );
     }
 
+    // We must define render()
     render() {
-        return (
-            <div>
-                Latitude: {this.state.lat}
-                <SeasonDisplay />
-            </div>
-        );
+        // Outlining conditional rendering in a document
+        if (this.state.errorMessage && !this.state.lat) {
+            return <div>Error: {this.state.errorMessage}</div>;
+        }
+
+        if (!this.state.errorMessage && this.state.lat) {
+            return <div>Latitude {this.state.lat}</div>;
+        }
+
+        return <div>Loading...</div>;
     }
 }
 
