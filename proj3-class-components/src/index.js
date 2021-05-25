@@ -19,16 +19,8 @@ class App extends React.Component {
     componentDidMount() {
         console.log(`App rendered`);
         window.navigator.geolocation.getCurrentPosition(
-            (position) => {
-                // We called setState!
-                this.setState({ lat: position.coords.latitude });
-                // You dont ever want to directly assign to state, just use setState instead
-                // 1 exception: when we init the state in the constructor
-            },
-            (error) => {
-                // You dont have to update the entire object when you call setState
-                this.setState({ errorMessage: error.message });
-            },
+            (position) => this.setState({ lat: position.coords.latitude }),
+            (error) => this.setState({ errorMessage: error.message }),
         );
     }
 
@@ -45,7 +37,7 @@ class App extends React.Component {
             return <div>Error: {this.state.errorMessage}</div>;
         }
         if (!this.state.errorMessage && this.state.lat) {
-            return <div>Latitude {this.state.lat}</div>;
+            return <SeasonDisplay lat={this.state.lat} />;
         }
         return <div>Loading...</div>;
     }
