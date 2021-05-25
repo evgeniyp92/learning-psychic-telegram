@@ -3,10 +3,17 @@ import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { lat: null, errorMessage: `` };
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = { lat: null, errorMessage: `` };
+    // }
+
+    // newer and easier way of setting up state compared to above
+    // thanks babel!
+    state = {
+        lat: null,
+        errorMessage: ``,
+    };
 
     // predefined function name for javascript code to be executed when the component renders
     componentDidMount() {
