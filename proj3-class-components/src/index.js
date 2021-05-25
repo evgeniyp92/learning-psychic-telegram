@@ -31,8 +31,7 @@ class App extends React.Component {
         console.log(`App updated/rerendered`);
     }
 
-    // We must define render()
-    render() {
+    renderContent() {
         // Outlining conditional rendering in a document
         if (this.state.errorMessage && !this.state.lat) {
             return <div>Error: {this.state.errorMessage}</div>;
@@ -44,6 +43,13 @@ class App extends React.Component {
             // If no prompt is provided the component will render silently without any text
             <Spinner prompt='Please allow the browser request to continue...' />
         );
+    }
+
+    // We must define render()
+    // Try as hard as possible to avoid having multiple render methods,
+    // put any conditional logic into render methods instead
+    render() {
+        return <div className='border red'>{this.renderContent()}</div>;
     }
 }
 
