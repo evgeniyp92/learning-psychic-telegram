@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Dropdown = ({ options, selected, onSelectedChange }) => {
     const [open, setOpen] = useState(false);
+    const ref = useRef();
 
     useEffect(() => {
+        // because this is wired up into the dom it
+        // gets called before any react event listeners
+        // react elements go from child to parent after that
         document.body.addEventListener(
             'click',
-            () => {
-                console.log(`body click`);
+            (e) => {
+                if (ref.current.contains(e.target)) {
+                    return;
+                }
                 setOpen(false);
             },
             { capture: true },
@@ -24,7 +30,6 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
                 className='item'
                 key={option.value}
                 onClick={() => {
-                    console.log(`item clicked`);
                     onSelectedChange(option);
                 }}
             >
@@ -34,12 +39,11 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
     });
 
     return (
-        <div className='ui form'>
+        <div className='ui form' ref={ref}>
             <div className='field'>
                 <label className='label'>Select a color</label>
                 <div
                     onClick={() => {
-                        console.log(`dropdown clicked`);
                         setOpen(!open);
                     }}
                     className={`ui selection dropdown ${
