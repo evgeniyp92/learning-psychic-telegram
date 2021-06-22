@@ -3,6 +3,7 @@ import Accordion from "./components/Accordion";
 import Search from "./components/Search";
 import Dropdown from "./components/Dropdown";
 import Translate from "./components/Translate";
+import Route from "./components/Route";
 
 const items = [
   {
@@ -25,36 +26,29 @@ const options = [
   { label: "A Shade of Blue", value: "blue" },
 ];
 
-// Route mappings
-const showAccordion = () => {
-  if (window.location.pathname === '/') {
-    return <Accordion items={items} />;
-  }
-}
-const showSearch = () => {
-  if (window.location.pathname === '/search') {
-    return <Search />
-  }
-}
-const showDropdown = () => {
-  if (window.location.pathname === '/dropdown') {
-    return <Dropdown />
-  }
-}
-const showTranslate = () => {
-  if (window.location.pathname === '/translate') {
-    return <Translate />
-  }
-}
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
+  const [selected, setSelected] = useState(options[0]);
+
   return (
     <div>
-      {showAccordion()}
-      {showSearch()}
-      {showDropdown()}
-      {showTranslate()}
+      <Route path='/'>
+        <Accordion items={items} />
+      </Route>
+      <Route path='/search'>
+        <Search />
+      </Route>
+      <Route path='/dropdown'>
+        <Dropdown
+          label='select a color'
+          options={options}
+          selected={selected}
+          onSelectedChange={setSelected}
+        />
+      </Route>
+      <Route path='/translate'>
+        <Translate />
+      </Route>
     </div>
   );
 };
