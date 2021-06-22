@@ -8,16 +8,23 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
         // because this is wired up into the dom it
         // gets called before any react event listeners
         // react elements go from child to parent after that
-        document.body.addEventListener(
-            'click',
-            (e) => {
-                if (ref.current.contains(e.target)) {
-                    return;
-                }
-                setOpen(false);
-            },
-            { capture: true },
-        );
+
+        const onBodyClick = (e) => {
+            if (ref.current.contains(e.target)) {
+                return;
+            }
+            setOpen(false);
+        };
+
+        document.body.addEventListener('click', onBodyClick, { capture: true });
+
+        // cleanup functions also fire when a component is removed
+        // this avoids event listeners trying to do stuff with missing refs
+        return () => {
+            document.body.removeEventListener('click', onBodyClick, {
+                capture: true,
+            });
+        };
     }, []);
 
     const renderedOptions = options.map((option) => {
