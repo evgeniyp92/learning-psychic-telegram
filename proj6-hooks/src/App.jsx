@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Accordion from './components/Accordion';
-import Search from './components/Search';
-import Dropdown from './components/Dropdown';
-import Translate from './components/Translate';
+import React, { useState } from "react";
+import Accordion from "./components/Accordion";
+import Search from "./components/Search";
+import Dropdown from "./components/Dropdown";
+import Translate from "./components/Translate";
 
 const items = [
   {
@@ -20,16 +20,41 @@ const items = [
 ];
 
 const options = [
-  { label: 'The Color Red', value: 'red' },
-  { label: 'The Color Green', value: 'green' },
-  { label: 'A Shade of Blue', value: 'blue' },
+  { label: "The Color Red", value: "red" },
+  { label: "The Color Green", value: "green" },
+  { label: "A Shade of Blue", value: "blue" },
 ];
+
+// Route mappings
+const showAccordion = () => {
+  if (window.location.pathname === '/') {
+    return <Accordion items={items} />;
+  }
+}
+const showSearch = () => {
+  if (window.location.pathname === '/search') {
+    return <Search />
+  }
+}
+const showDropdown = () => {
+  if (window.location.pathname === '/dropdown') {
+    return <Dropdown />
+  }
+}
+const showTranslate = () => {
+  if (window.location.pathname === '/translate') {
+    return <Translate />
+  }
+}
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
   return (
     <div>
-      <Translate />
+      {showAccordion()}
+      {showSearch()}
+      {showDropdown()}
+      {showTranslate()}
     </div>
   );
 };
