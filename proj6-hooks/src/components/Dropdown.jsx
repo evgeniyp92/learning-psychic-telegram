@@ -9,8 +9,8 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
         // gets called before any react event listeners
         // react elements go from child to parent after that
 
-        const onBodyClick = (e) => {
-            if (ref.current.contains(e.target)) {
+        const onBodyClick = (event) => {
+            if (ref.current.contains(event.target)) {
                 return;
             }
             setOpen(false);
