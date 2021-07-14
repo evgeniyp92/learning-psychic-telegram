@@ -1,10 +1,23 @@
-import React, { StrictMode } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+// this is what hooks in redux
+import { Provider } from 'react-redux';
+// this is what generates the store
+import { createStore } from 'redux';
+
 import App from './components/App';
+// this is what you pass into createStore() to generate your state
+import reducers from './reducers';
 
 ReactDOM.render(
-  <StrictMode>
+  <Provider
+    // creating the store and enabling redux devtools
+    store={createStore(
+      reducers,
+      window.__REDUX_DEVTOOLS_EXTENSION__ &&
+        window.__REDUX_DEVTOOLS_EXTENSION__()
+    )}>
     <App />
-  </StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );

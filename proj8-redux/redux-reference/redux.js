@@ -74,6 +74,7 @@ const policies = (action, oldListOfPolicies = []) => {
 // its important to always return something **new** from a reducer
 
 // Wiring into redux store
+// eslint-disable-next-line no-undef
 const { createStore, combineReducers } = Redux;
 
 const ourDepartments = combineReducers({
