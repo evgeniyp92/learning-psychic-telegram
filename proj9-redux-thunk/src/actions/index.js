@@ -35,7 +35,7 @@ import jsonPlaceholder from '../api/jsonPlaceholder';
 // with redux thunk we can manually dispatch actions in the future
 // after the action is dispatched it gets passed back into thunk again as an object
 // so thunk passes it down to the reducers
-export const fetchPosts = () => async dispatch => {
+export const fetchPosts = () => async (dispatch, getState) => {
   // in the inner function you do not return any actions from the inner object
   // call dispatch instead
   // also, with thunk async await in inner functions is perfectly fine again
