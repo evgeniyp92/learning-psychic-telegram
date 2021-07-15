@@ -25,14 +25,21 @@ import jsonPlaceholder from '../api/jsonPlaceholder';
 // and without async we get a promise.
 // We cant just tell a reducer to wait.
 //
+//
 // https://babeljs.io/repl#?browsers=&build=&builtIns=false&corejs=3.6&spec=false&loose=false&code_lz=MYewdgzgLgBAZgUysAFgBRNCMC8MAUAlLgHwwDeAUDDKJLAE4IQAO4ECuMAVhOGgBsAhsAQoQAgCYIGAOgDmSfAHIA9GyzLCAbmowmUAK4MwFPTSgBPFggBcMZQDEAogBUAwgAkA-mgDyAMquAcoANOYwLEKWAiBCkvZMrOwI4TQAvrqZQA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=env%2Creact%2Cstage-0%2Cstage-1%2Cstage-2%2Cstage-3%2Ctypescript%2Cflow&prettier=true&targets=&version=7.14.7&externalPlugins=
 // thats what it looks like without
 // so basically async is neat but its a fucking nightmare on the backend
 
-export const fetchPosts = () => {
-  const response = jsonPlaceholder.get('/posts');
-  return {
-    type: 'FETCH_POSTS',
-    payload: response,
-  };
+// With redux thunk we can return a function as well as an action object
+// If redux thunk sees a function it will call it for you
+// with redux thunk we can manually dispatch actions in the future
+// after the action is dispatched it gets passed back into thunk again as an object
+// so thunk passes it down to the reducers
+export const fetchPosts = () => async dispatch => {
+  // in the inner function you do not return any actions from the inner object
+  // call dispatch instead
+  // also, with thunk async await in inner functions is perfectly fine again
+  const response = await jsonPlaceholder.get('/posts');
+
+  dispatch({ type: `FETCH_POSTS`, payload: response });
 };
