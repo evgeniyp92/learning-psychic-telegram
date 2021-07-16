@@ -13,6 +13,8 @@
 // 4) Must not mutate its input 'state' arg (you have to return new state)
 // 4.5) I mean, you can but its not recommended
 // 4.9) There's a corner case
+// if your old state and new state point to the exact same object in the heap
+// it will return the old object
 
 import { combineReducers } from 'redux';
 
