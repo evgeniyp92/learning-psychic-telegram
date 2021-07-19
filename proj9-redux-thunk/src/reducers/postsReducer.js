@@ -1,3 +1,14 @@
 export default (posts = [], action) => {
-  return [1, 2, 3];
+  // if (action.type === 'FETCH_POSTS') {
+  //   return action.payload;
+  // }
+
+  // return posts;
+
+  switch (action.type) {
+    case 'FETCH_POSTS':
+      return action.payload;
+    default:
+      return posts;
+  }
 };
