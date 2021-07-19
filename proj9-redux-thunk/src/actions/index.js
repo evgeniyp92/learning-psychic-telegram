@@ -41,14 +41,17 @@ export const fetchPosts = () => async (dispatch, getState) => {
   // call dispatch instead
   // also, with thunk async await in inner functions is perfectly fine again
   const response = await jsonPlaceholder.get('/posts');
-
   dispatch({ type: `FETCH_POSTS`, payload: response.data });
 };
 
-export const fetchUser = id => dispatch => _fetchUser(id, dispatch);
+// export const fetchUser = id => dispatch => _fetchUser(id, dispatch);
+// const _fetchUser = _.memoize(async (id, dispatch) => {
+//   const response = await jsonPlaceholder.get(`/users/${id}`);
 
-const _fetchUser = _.memoize(async (id, dispatch) => {
+//   dispatch({ type: 'FETCH_USER', payload: response.data });
+// });
+
+export const fetchUser = id => async dispatch => {
   const response = await jsonPlaceholder.get(`/users/${id}`);
-
   dispatch({ type: 'FETCH_USER', payload: response.data });
-});
+};
