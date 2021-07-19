@@ -55,3 +55,16 @@ export const fetchUser = id => async dispatch => {
   const response = await jsonPlaceholder.get(`/users/${id}`);
   dispatch({ type: 'FETCH_USER', payload: response.data });
 };
+
+export const fetchPostsAndUsers = () => async (dispatch, getState) => {
+  // when you have action creators in action creators you must make sure to dispatch the function
+  // since we don't want to try to access the list of posts before its done we need to add await
+  // this way the function waits for the GET to complete before proceeding
+  await dispatch(fetchPosts());
+
+  const userIds = _.uniq(_.map(getState().posts, 'userId'));
+
+  for (const id of userIds) {
+    dispatch(fetchUser(id));
+  }
+};
