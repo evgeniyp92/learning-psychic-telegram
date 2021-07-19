@@ -41,5 +41,5 @@ export const fetchPosts = () => async (dispatch, getState) => {
   // also, with thunk async await in inner functions is perfectly fine again
   const response = await jsonPlaceholder.get('/posts');
 
-  dispatch({ type: `FETCH_POSTS`, payload: response });
+  dispatch({ type: `FETCH_POSTS`, payload: response.data });
 };
