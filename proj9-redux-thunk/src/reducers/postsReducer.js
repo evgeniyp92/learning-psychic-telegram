@@ -1,4 +1,4 @@
-export default (posts = [], action) => {
+export default (state = [], action) => {
   // if (action.type === 'FETCH_POSTS') {
   //   return action.payload;
   // }
@@ -9,6 +9,6 @@ export default (posts = [], action) => {
     case 'FETCH_POSTS':
       return action.payload;
     default:
-      return posts;
+      return state;
   }
 };
