@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 // here, Field is a component and reduxForm is a function
 import { Field, formValues, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { createStream } from '../../actions';
 
 export class StreamCreate extends Component {
   renderError({ error, touched }) {
