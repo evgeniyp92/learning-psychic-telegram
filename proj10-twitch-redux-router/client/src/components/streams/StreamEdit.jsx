@@ -1,14 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchStreams } from '../../actions';
+import { fetchStream } from '../../actions';
 
-const StreamEdit = ({ fetchStreams, history, location, match, stream }) => {
-  useEffect(() => {
-    fetchStreams();
-  }, [fetchStreams]);
-  return <div>StreamEdit</div>;
-};
+class StreamEdit extends React.Component {
+  componentDidMount() {
+    this.props.fetchStream(this.props.match.params.id);
+  }
+
+  render() {
+    if (!this.props.stream) {
+    }
+    return (
+      <div>
+        <div>{this.props.stream.title}</div>
+        <div>{this.props.stream.description}</div>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state, ownProps) => {
   console.log(ownProps);
@@ -17,4 +27,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchStreams })(StreamEdit);
+export default connect(mapStateToProps, { fetchStream })(StreamEdit);
