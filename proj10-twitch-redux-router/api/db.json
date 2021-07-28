@@ -1,0 +1,30 @@
+{
+  "streams": [
+    {
+      "title": "My cool stream",
+      "description": "Ery noice",
+      "id": 1
+    },
+    {
+      "title": "Other stream",
+      "description": "Here's some stream",
+      "id": 2
+    },
+    {
+      "title": "This stream should have a UID associated with it",
+      "description": "Count dankula",
+      "id": 3
+    },
+    {
+      "title": "This is a stream created after the refactor",
+      "description": "YEETUS MY MEATUS",
+      "id": 4
+    },
+    {
+      "title": "12345678",
+      "description": "4312",
+      "userId": "100891950453134238729",
+      "id": 5
+    }
+  ]
+}
