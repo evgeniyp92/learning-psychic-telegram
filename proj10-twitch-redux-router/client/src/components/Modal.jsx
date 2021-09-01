@@ -1,14 +1,17 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
+import history from '../history';
 
 const Modal = props => {
   return createPortal(
-    <div className='ui dimmer modals visible active'>
-      <div className='ui standard modal visible active'>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem
-        qui sit consequuntur commodi adipisci, porro, asperiores soluta quos
-        pariatur fugiat eligendi illo consequatur hic perspiciatis officiis.
-        Quis sed quidem odio.
+    <div className='ui dimmer modals visible active' onClick={props.onDismiss}>
+      <div
+        className='ui standard modal visible active'
+        // e.stopPropagation will halt event bubbling up
+        onClick={e => e.stopPropagation()}>
+        <div className='header'>{props.title}</div>
+        <div className='content'>{props.content}</div>
+        <div className='actions'>{props.actions}</div>
       </div>
     </div>,
     document.querySelector('#modal')
