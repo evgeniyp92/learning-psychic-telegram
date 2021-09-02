@@ -1,6 +1,5 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import history from '../history';
 
 const Modal = props => {
   return createPortal(
