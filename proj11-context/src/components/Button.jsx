@@ -15,7 +15,7 @@ export class Button extends Component {
       <button className={`ui button ${color}`}>
         {/* 'Consuming' data from the language context */}
         <LanguageContext.Consumer>
-          {value => (value === 'english' ? 'Submit' : 'Voorleggen')}
+          {({ language }) => (language === 'english' ? 'Submit' : 'Voorleggen')}
         </LanguageContext.Consumer>
       </button>
     );
