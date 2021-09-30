@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import LanguageContext from '../contexts/LanguageContext';
 import ColorContext from '../contexts/ColorContext';
 

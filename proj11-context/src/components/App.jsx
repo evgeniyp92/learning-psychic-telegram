@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 import LanguageContext from '../contexts/LanguageContext';
 import ColorContext from '../contexts/ColorContext';
 
 import UserCreate from './UserCreate';
+import LanguageSelector from './LanguageSelector';
 
 /**
  * The flow of the Context system is generally as follows:
@@ -33,16 +34,9 @@ class App extends Component {
   render() {
     return (
       <div className='ui container'>
-        <div>
-          Select a language:
-          <i
-            className='flag us'
-            onClick={() => this.onLanguageChange('english')}></i>
-          <i
-            className='flag nl'
-            onClick={() => this.onLanguageChange('dutch')}></i>
-        </div>
-        {/* Providing context and data to the UserCreate component, and the LanguageContext */}
+        <LanguageSelector onLanguageChange={this.onLanguageChange} />
+        {/* Providing context and data to the UserCreate component, 
+        and the LanguageContext */}
         <ColorContext.Provider value='red'>
           <LanguageContext.Provider value={this.state.language}>
             <UserCreate />
